@@ -96,3 +96,12 @@ html, body{
     border-color: #cfc6f5;
     color: #735cc6;
 }
+.toolbar_sort{
+    padding: 10px 28px 10px 10px;
+    font-size: 14px;
+    border: 1px solid rgba(30, 10, 60, 0.12);
+    border-radius: 8px;
+    background:#fff;
+    font-weight: 500;
+    color: #5e5472;
+}
