@@ -39,12 +39,12 @@ if (title === "") {
     console.log("Задача:", title);
 }
 
-// 7. Проверка переменной tasks
-let tasks = 2;
+// 7. Проверка переменной iff
+let iff = 2;
 
-if (tasks === 0) {
+if (iff === 0) {
     console.log("Список пуст");
-} else if (tasks >= 1 && tasks <= 3) {
+} else if (iff >= 1 && iff <= 3) {
     console.log("Немного задач");
 } else {
     console.log("Много задач");
@@ -62,9 +62,9 @@ if (isCompleted) {
 // 9. Проверка переменной urgent
 let urgent = true;
 
-if (tasks > 0 && urgent) {
+if (iff > 0 && urgent) {
     console.log("Есть срочные задачи");
-} else if (tasks > 0 && !urgent) {
+} else if (iff > 0 && !urgent) {
     console.log("Задачи есть, но они не срочные");
 } else {
     console.log("Все задачи завершены");
@@ -118,3 +118,38 @@ for (let testAmount of testAmounts) {
         console.log("Скидка 10%");
     }
 }
+
+
+let cities = ["Москва", "Париж", "Питер", "Токио"];
+cities[2] = "Лондон";
+console.log(cities)
+
+let task = {
+    id: 1,
+    title: "Купить молоко",
+    status: "активна"
+};
+console.log(task.id);;
+console.log(task.title);
+console.log(task.status);
+
+let tasks = [
+    {id: 1, title: "Купить молоко", status: "активна"},
+    {id: 2, title: "Позвонить врачу", status: "выполнена"},
+    {id: 3, title: "Сделать уроки", status: "активна"},
+];
+console.log(tasks[0].title);
+console.log(tasks[1].status);
+
+tasks[0].status = "выполнена";
+console.log(tasks[0]);
+
+task.push({id: 4, title: "Прогулка", status: "активна"});
+console.log(tasks);
+
+let user = {
+    name: "Анна",
+    tasks: tasks
+};
+console.log(user.name);
+console.log(user.tasks.length);

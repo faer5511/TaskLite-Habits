@@ -197,3 +197,20 @@ html, body{
     align-items: center;
     gap: 8px;
 }
+.task_action:hover{
+    background: #f6f4ff;
+    border-color: rgba(30, 19, 68, 0.2);
+    box-shadow: 0 6px 12px rgba(126, 102, 205, 0.18);
+}
+.task_action:focus-visible {
+    outline: none;
+    box-shadow: 0 0 3px rgba(126, 102, 205, 0.22);
+}
+.task_action:active {
+    transform: translateY(1px);
+}
+.task_icon {
+    width: 14px;
+    height: 14px;
+    display: block;
+}
