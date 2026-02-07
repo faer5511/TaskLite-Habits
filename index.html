@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TaskLite - To DO</title>
-
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="todo">
@@ -13,7 +12,7 @@
             <div class="header_title">TaskLite</div>
         </div>
 
-       <nav class="tabs">
+        <nav class="tabs">
             <a href="index.html" class="tab active">To Do</a>
             <a href="index.html" class="tab">Kanban</a>
             <a href="index.html" class="tab">Привычки</a>
@@ -21,13 +20,32 @@
     </header>
 
     <main class="container">
-       <h1 class="page-title">To Do</h1>
+        <h1 class="page-title">To Do</h1>
+        
+        <!-- Панель инструментов -->
+        <div class="toolbar">
+            <div class="toolbar_search">
+                <input type="text" class="toolbar_search-input" placeholder="Поиск задач...">
+            </div>
+            <div class="tabs toolbar_tabs">
+                <button class="tabs_item tabs_item--active">Все</button>
+                <button class="tabs_item">Активные</button>
+                <button class="tabs_item">Завершённые</button>
+            </div>
+            <select class="toolbar_sort">
+                <option value="date">По дате</option>
+                <option value="priority">По приоритету</option>
+                <option value="name">По названию</option>
+            </select>
+        </div>
+
         <div class="form-add">
             <input class="form-add_input" type="text" placeholder="Введите задачу" />
             <button class="for-add_button" type="button">Добавить</button>
         </div>
     </main>
-</body>
 
-<script src="script.js"></script>
+    <script src="script.js"></script>
+    <script src="task.js"></script>
+</body>
 </html>
