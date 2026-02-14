@@ -170,7 +170,6 @@ html, body{
     margin-top: 30px;
 }
 
-
 .task{
     padding: 10px 12px;
     border: 1px solid rgba(30, 10, 60, 8.12);
@@ -213,4 +212,91 @@ html, body{
     width: 14px;
     height: 14px;
     display: block;
+}
+
+
+/* ===== КНОПКА ОЧИСТКИ ВЫПОЛНЕННЫХ ===== */
+
+.button--clear {
+    /* Внутренние отступы */
+    padding: 6px 12px;
+    
+    /* Типографика */
+    font-size: 13px;
+    text-align: left;
+    
+    /* Фон и рамка */
+    background: transparent;
+    border: 1px dashed #a28bdc;
+    border-radius: 8px;
+    
+    /* Цвет текста */
+    color: #735cc6;
+    
+    /* Курсор */
+    cursor: pointer;
+    
+    /* Плавный переход */
+    transition: background 0.2s ease, 
+                color 0.2s ease, 
+                border-color 0.2s ease,
+                border-style 0.2s ease;
+    
+    /* Дополнительные стили для лучшего вида */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1.4;
+    white-space: nowrap;
+}
+
+/* Состояние при наведении */
+.button--clear:hover {
+    background: #f6f4ff;
+    color: #735cc6;
+    border: 1px solid #735cc6;
+    border-style: solid;
+}
+
+/* Состояние при клике (активное) */
+.button--clear:active {
+    background: #e9e5f9;
+    border-color: #5d47aa;
+    color: #5d47aa;
+    transform: translateY(1px); /* Небольшой эффект нажатия */
+}
+
+/* Состояние заблокированной кнопки */
+.button--clear:disabled,
+.button--clear.disabled {
+    color: #8e8b99;
+    border-color: #c8c5cf;
+    background: #f1f1f3;
+    cursor: not-allowed;
+    border-style: dashed;
+    transform: none; /* Отменяем трансформацию при disabled */
+}
+
+/* Состояние фокуса для доступности */
+.button--clear:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(115, 92, 198, 0.3);
+    border-color: #735cc6;
+}
+
+/* Если кнопка содержит иконку */
+.button--clear svg,
+.button--clear img {
+    width: 14px;
+    height: 14px;
+    margin-right: 6px;
+    fill: currentColor; /* Иконка наследует цвет текста */
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+    .button--clear {
+        width: 100%;
+        justify-content: center;
+    }
 }
