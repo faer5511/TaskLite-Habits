@@ -1,9 +1,52 @@
-# Системные файлы
-.DS_Store
-Thumbs.db
-# Временные файлы и журналы
+# ===== ОПЕРАЦИОННЫЕ СИСТЕМЫ =====
+.DS_Store           # macOS
+Thumbs.db           # Windows
+desktop.ini         # Windows
+ehthumbs.db         # Windows
+
+# ===== РЕДАКТОРЫ КОДА =====
+.vscode/            # Visual Studio Code
+.idea/              # IntelliJ IDEA
+*.swp               # Vim swap files
+*.swo               # Vim swap files
+*~                  # Backup files
+
+# ===== ЛОГИ =====
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ===== ЗАВИСИМОСТИ (если будешь использовать npm/yarn) =====
+node_modules/
+jspm_packages/
+package-lock.json
+yarn.lock
+
+# ===== ПЕРЕМЕННЫЕ ОКРУЖЕНИЯ =====
+.env
+.env.local
+.env.*.local
+
+# ===== ВРЕМЕННЫЕ ФАЙЛЫ =====
 *.tmp
-# Папки IDE/редакторов
-.idea/
-.vscode/
+*.temp
+*.cache
+*.bak
+*.backup
+
+# ===== БИЛДЫ =====
+dist/
+build/
+out/
+*.min.js
+*.min.css
+
+# ===== ТЕСТЫ =====
+coverage/
+.nyc_output/
+
+# ===== ДРУГОЕ =====
+*.pid
+*.seed
+*.pid.lock
