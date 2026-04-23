@@ -1,16 +1,12 @@
-/* ================================================
-   TASKLITE HABITS - ПОЛНЫЙ CSS ФАЙЛ
-   Версия: 2.0
-   Описание: Стили для To Do листа и Kanban доски
-   ================================================ */
-
 /* ===== 1. БАЗОВЫЕ СБРОСЫ И НАСТРОЙКИ ===== */
+/* Обнуляем отступы у всех элементов */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Базовые стили для html и body */
 html, body {
     margin: 0;
     font-family: "Inter", -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -18,6 +14,7 @@ html, body {
 }
 
 /* ===== 2. ОСНОВНЫЕ КОНТЕЙНЕРЫ ===== */
+/* Ограничивает ширину контента и центрирует по горизонтали */
 .container {
     max-width: 1024px;
     margin: 0 auto;
@@ -25,15 +22,17 @@ html, body {
 }
 
 /* ===== 3. ШАПКА (HEADER) ===== */
+/* Липкая шапка - остаётся наверху при скролле */
 .header {
     position: sticky;
     top: 0;
     z-index: 10;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     background: rgba(255, 255, 255, 0.65);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);  /* Эффект размытия стекла */
 }
 
+/* Контейнер шапки - логотип слева, навигация справа */
 .header_container {
     display: flex;
     align-items: center;
@@ -42,6 +41,7 @@ html, body {
     padding-bottom: 14px;
 }
 
+/* Логотип с градиентом */
 .header_title {
     font-size: 18px;
     font-weight: 700;
@@ -51,12 +51,14 @@ html, body {
     color: transparent;
 }
 
-/* ===== 4. НАВИГАЦИОННЫЕ ВКЛАДКИ (TABS) ===== */
+/* ===== 4. НАВИГАЦИОННЫЕ ВКЛАДКИ ===== */
+/* Контейнер вкладок */
 .tabs {
     display: flex;
     gap: 12px;
 }
 
+/* Стиль одной вкладки */
 .tab {
     text-decoration: none;
     background-color: transparent;
@@ -70,30 +72,32 @@ html, body {
     transition: all 0.2s;
 }
 
+/* Эффект при наведении на вкладку */
 .tab:hover {
     background: rgba(126, 102, 205, 0.1);
     border-color: rgba(126, 102, 205, 0.3);
 }
 
+/* Активная вкладка */
 .tab.active {
     background: #e3ddf4;
     border: 1px solid rgba(126, 102, 205, 0.55);
     color: #7e66cd;
 }
 
-/* ===== 5. ФОН СТРАНИЦ (ГРАДИЕНТЫ) ===== */
-/* Фон для главной страницы To Do */
+/* ===== 5. ФОН СТРАНИЦ ===== */
+/* Фон для главной страницы To Do - градиент с радиальными пятнами */
 .todo {
     background:
         radial-gradient(1200px 900px at 20% 25%, #ebe6f5 0%, transparent 60%),
         radial-gradient(1200px 900px at 80% 35%, #f6eee4 0%, transparent 60%),
         radial-gradient(1200px 900px at 20% 25%, #e6eef6 0%, transparent 60%),
         linear-gradient(#f6f3f9, #fbfaf8);
-    background-attachment: fixed;
+    background-attachment: fixed;  /* Фиксированный фон при скролле */
     min-height: 100vh;
 }
 
-/* Фон для страницы Kanban */
+/* Фон для страницы Kanban - голубоватая тема */
 .kanban {
     background:
         radial-gradient(1200px 900px at 20% 25%, #d9ecff 0%, transparent 60%),
@@ -104,6 +108,7 @@ html, body {
     min-height: 100vh;
 }
 
+/* Общий заголовок страницы */
 .page-title {
     font-size: 22px;
     font-weight: 600;
@@ -111,15 +116,15 @@ html, body {
     color: #1e0a3c;
 }
 
-/* ================================================
-   6. СТРОКА 1: ДОБАВЛЕНИЕ ЗАДАЧИ (Add Task)
-   ================================================ */
+/* ===== 6. СТРОКА ДОБАВЛЕНИЯ ЗАДАЧИ ===== */
+/* Контейнер для поля ввода и кнопки */
 .add-row {
     display: flex;
     gap: 12px;
     margin-bottom: 20px;
 }
 
+/* Поле ввода новой задачи */
 .add-input {
     flex: 1;
     padding: 14px 18px;
@@ -130,18 +135,21 @@ html, body {
     transition: all 0.2s;
 }
 
+/* Эффект при фокусе на поле ввода */
 .add-input:focus {
     outline: none;
     border-color: #7e66cd;
     box-shadow: 0 0 0 3px rgba(126, 102, 205, 0.1);
 }
 
+/* Стиль ошибки для поля ввода */
 .add-input.input--error {
     border-color: #cb6e6e;
     box-shadow: 0 0 0 3px rgba(203, 110, 110, 0.1);
-    animation: shake 0.3s ease;
+    animation: shake 0.3s ease;  /* Встряхивание при ошибке */
 }
 
+/* Кнопка добавления задачи */
 .add-btn {
     padding: 14px 28px;
     background: #7e66cd;
@@ -155,19 +163,19 @@ html, body {
     white-space: nowrap;
 }
 
+/* Эффект при наведении на кнопку */
 .add-btn:hover {
     background: #6a52b8;
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(126, 102, 205, 0.3);
 }
 
+/* Эффект при нажатии */
 .add-btn:active {
     transform: translateY(0);
 }
 
-/* ================================================
-   7. СТРОКА 2: ПОИСК ЗАДАЧ (Search)
-   ================================================ */
+/* ===== 7. СТРОКА ПОИСКА ===== */
 .search-row {
     margin-bottom: 20px;
 }
@@ -176,6 +184,7 @@ html, body {
     width: 100%;
 }
 
+/* Поле поиска */
 .search-input {
     width: 100%;
     padding: 12px 18px;
@@ -186,19 +195,19 @@ html, body {
     transition: all 0.2s;
 }
 
+/* Эффект при фокусе на поиске */
 .search-input:focus {
     outline: none;
     border-color: #7e66cd;
     box-shadow: 0 0 0 3px rgba(126, 102, 205, 0.1);
 }
 
+/* Плейсхолдер для поиска */
 .search-input::placeholder {
     color: #9b96a6;
 }
 
-/* ================================================
-   8. СТРОКА 3: ФИЛЬТРЫ И СОРТИРОВКА (Filters & Sort)
-   ================================================ */
+/* ===== 8. СТРОКА ФИЛЬТРОВ И СОРТИРОВКИ ===== */
 .filter-sort-row {
     display: flex;
     justify-content: space-between;
@@ -208,7 +217,7 @@ html, body {
     flex-wrap: wrap;
 }
 
-/* Кнопки фильтрации */
+/* Контейнер кнопок фильтрации */
 .filter-tabs {
     display: flex;
     gap: 8px;
@@ -218,6 +227,7 @@ html, body {
     backdrop-filter: blur(4px);
 }
 
+/* Кнопка фильтра */
 .filter-btn {
     padding: 10px 20px;
     border: none;
@@ -230,24 +240,27 @@ html, body {
     transition: all 0.2s;
 }
 
+/* Эффект при наведении на кнопку фильтра */
 .filter-btn:hover {
     background: rgba(126, 102, 205, 0.1);
     color: #735cc6;
 }
 
+/* Активная кнопка фильтра */
 .filter-btn.active {
     background: #7e66cd;
     color: white;
     box-shadow: 0 2px 8px rgba(126, 102, 205, 0.3);
 }
 
-/* Выпадающий список сортировки */
+/* Контейнер для сортировки */
 .sort-group {
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
+/* Выпадающий список сортировки */
 .sort-select {
     padding: 10px 32px 10px 16px;
     font-size: 14px;
@@ -260,19 +273,19 @@ html, body {
     font-weight: 500;
 }
 
+/* Эффект при наведении на сортировку */
 .sort-select:hover {
     border-color: #7e66cd;
 }
 
+/* Эффект при фокусе на сортировку */
 .sort-select:focus {
     outline: none;
     border-color: #7e66cd;
     box-shadow: 0 0 0 2px rgba(126, 102, 205, 0.1);
 }
 
-/* ================================================
-   9. СТРОКА 4: СЧЁТЧИКИ ЗАДАЧ (Statistics)
-   ================================================ */
+/* ===== 9. СТРОКА СТАТИСТИКИ ===== */
 .stats-row {
     display: flex;
     gap: 16px;
@@ -285,6 +298,7 @@ html, body {
     flex-wrap: wrap;
 }
 
+/* Карточка статистики */
 .stat-badge {
     display: flex;
     align-items: center;
@@ -297,33 +311,39 @@ html, body {
     transition: all 0.2s;
 }
 
+/* Эффект при наведении на карточку статистики */
 .stat-badge:hover {
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(126, 102, 205, 0.15);
 }
 
+/* Активная карточка (активные задачи) */
 .stat-badge.active {
     background: linear-gradient(135deg, #f6f4ff 0%, #fff 100%);
     border-color: #7e66cd;
 }
 
+/* Карточка выполненных задач */
 .stat-badge.completed {
     background: linear-gradient(135deg, #f0fdf4 0%, #fff 100%);
     border-color: #86efac;
 }
 
+/* Метка статистики */
 .stat-badge-label {
     font-size: 13px;
     color: #8a8398;
     font-weight: 500;
 }
 
+/* Значение статистики */
 .stat-badge-value {
     font-size: 22px;
     font-weight: 700;
     color: #7e66cd;
 }
 
+/* Значение для выполненных задач (зелёное) */
 .stat-badge.completed .stat-badge-value {
     color: #22c55e;
 }
@@ -342,23 +362,25 @@ html, body {
     transition: all 0.2s;
 }
 
+/* Эффект при наведении на кнопку очистки */
 .clear-completed-btn:hover {
     background: #fee2e2;
     border-color: #cb6e6e;
     transform: scale(1.02);
 }
 
+/* Эффект при нажатии */
 .clear-completed-btn:active {
     transform: scale(0.98);
 }
 
-/* ================================================
-   10. КАРТОЧКИ ЗАДАЧ (Task Cards) - To Do стиль
-   ================================================ */
+/* ===== 10. КАРТОЧКИ ЗАДАЧ (TO DO СТИЛЬ) ===== */
+/* Контейнер списка задач */
 .tasks-list {
     margin: 20px 0;
 }
 
+/* Карточка задачи */
 .task-item {
     background: #ffffff;
     border: 1px solid rgba(30, 10, 60, 0.08);
@@ -372,6 +394,7 @@ html, body {
     animation: fadeIn 0.2s ease;
 }
 
+/* Эффект при наведении на карточку */
 .task-item:hover {
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
     transform: translateY(-1px);
@@ -386,7 +409,7 @@ html, body {
     gap: 16px;
 }
 
-/* Чекбокс */
+/* Стиль чекбокса */
 .task-checkbox {
     margin-top: 2px;
 }
@@ -399,15 +422,17 @@ html, body {
     transition: transform 0.1s;
 }
 
+/* Эффект при нажатии на чекбокс */
 .task-checkbox input:active {
     transform: scale(0.95);
 }
 
-/* Информационная часть */
+/* Информационная часть задачи */
 .task-info {
     flex: 1;
 }
 
+/* Заголовок задачи */
 .task-title {
     font-size: 16px;
     font-weight: 600;
@@ -415,11 +440,13 @@ html, body {
     margin-bottom: 6px;
 }
 
+/* Зачёркнутый текст для выполненной задачи */
 .task-title.completed {
     text-decoration: line-through;
     color: #9b96a6;
 }
 
+/* Описание задачи */
 .task-desc {
     font-size: 13px;
     color: #8a8398;
@@ -436,12 +463,13 @@ html, body {
     flex-wrap: wrap;
 }
 
+/* Дата задачи */
 .task-date {
     color: #b4aee0;
     font-size: 11px;
 }
 
-/* Бейджи приоритетов */
+/* Бейдж приоритета */
 .priority-badge {
     display: inline-block;
     padding: 4px 12px;
@@ -450,27 +478,31 @@ html, body {
     font-weight: 600;
 }
 
+/* Низкий приоритет - зелёный */
 .priority-low {
     background-color: #DCFCE7;
     color: #156534;
 }
 
+/* Средний приоритет - жёлтый */
 .priority-medium {
     background-color: #FEF3C7;
     color: #92400D;
 }
 
+/* Высокий приоритет - красный */
 .priority-high {
     background-color: #FEE2E2;
     color: #991B1B;
 }
 
-/* Кнопки действий */
+/* Кнопки действий с задачей */
 .task-actions {
     display: flex;
     gap: 8px;
 }
 
+/* Кнопка удаления */
 .delete-btn {
     background: transparent;
     border: none;
@@ -482,19 +514,20 @@ html, body {
     transition: all 0.2s;
 }
 
+/* Эффект при наведении на кнопку удаления */
 .delete-btn:hover {
     background: #fee2e2;
     opacity: 1;
     transform: scale(1.05);
 }
 
+/* Эффект при нажатии */
 .delete-btn:active {
     transform: scale(0.95);
 }
 
-/* ================================================
-   11. ПУСТОЕ СОСТОЯНИЕ (Empty State)
-   ================================================ */
+/* ===== 11. ПУСТОЕ СОСТОЯНИЕ ===== */
+/* Когда нет ни одной задачи */
 .empty-state {
     text-align: center;
     padding: 60px 20px;
@@ -503,12 +536,14 @@ html, body {
     margin-top: 20px;
 }
 
+/* Иконка в пустом состоянии */
 .empty-icon {
     font-size: 64px;
     margin-bottom: 16px;
     opacity: 0.5;
 }
 
+/* Текст в пустом состоянии */
 .empty-text {
     font-size: 18px;
     font-weight: 500;
@@ -516,16 +551,14 @@ html, body {
     margin-bottom: 8px;
 }
 
+/* Подсказка в пустом состоянии */
 .empty-hint {
     font-size: 14px;
     color: #b4aee0;
 }
 
-/* ================================================
-   12. ДОСКА KANBAN (Drag & Drop)
-   ================================================ */
-
-/* Основной контейнер доски */
+/* ===== 12. КАНБАН ДОСКА ===== */
+/* Контейнер доски */
 .board {
     display: flex;
     gap: 28px;
@@ -534,19 +567,19 @@ html, body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px 0;
+    overflow-x: auto;
 }
 
-/* Колонки */
+/* Колонка канбана */
 .column {
     background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(8px);
     border: 1px solid rgba(0, 0, 0, 0.06);
-    border-radius: 16px;
-    width: 320px;
+    border-radius: 14px;
+    width: 280px;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
-    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 }
 
 /* Подсветка колонки при перетаскивании */
@@ -556,119 +589,97 @@ html, body {
     box-shadow: 0 8px 24px rgba(126, 102, 205, 0.15);
 }
 
-.column.drag-over .column_header h2 {
-    color: #7e66cd;
-}
-
 /* Заголовок колонки */
 .column_header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 14px 16px 12px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 10px 12px 8px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
+/* Заголовок h2 в колонке */
 .column_header h2 {
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 600;
     margin: 0;
-    padding-left: 10px;
+    padding-left: 8px;
 }
 
-/* Цветные полоски для разных колонок */
+/* Цветная полоска для колонки To Do */
 .column[data-status="todo"] .column_header h2 {
-    border-left: 4px solid #3b82f6;
+    border-left: 3px solid #3b82f6;
 }
 
+/* Цветная полоска для колонки In Progress */
 .column[data-status="in-progress"] .column_header h2 {
-    border-left: 4px solid #eab308;
+    border-left: 3px solid #eab308;
 }
 
+/* Цветная полоска для колонки Done */
 .column[data-status="done"] .column_header h2 {
-    border-left: 4px solid #a78bfa;
+    border-left: 3px solid #a78bfa;
 }
 
 /* Счётчик задач в колонке */
 .column_count {
-    font-size: 13px;
+    font-size: 11px;
     font-weight: 600;
     color: #64748b;
     background: rgba(0, 0, 0, 0.05);
-    padding: 2px 10px;
+    padding: 2px 7px;
     border-radius: 20px;
 }
 
 /* Список задач в колонке */
 .task-list {
     flex: 1;
-    padding: 12px;
-    min-height: 300px;
-    max-height: 500px;
+    padding: 6px;
+    min-height: 150px;
+    max-height: 450px;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
-/* Кастомный скроллбар для списка задач */
-.task-list::-webkit-scrollbar {
-    width: 4px;
-}
-
-.task-list::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.05);
-    border-radius: 10px;
-}
-
-.task-list::-webkit-scrollbar-thumb {
-    background: rgba(126, 102, 205, 0.3);
-    border-radius: 10px;
-}
-
-.task-list::-webkit-scrollbar-thumb:hover {
-    background: rgba(126, 102, 205, 0.5);
-}
-
-/* ===== КАРТОЧКИ ЗАДАЧ В KANBAN ===== */
+/* Стили для карточек в канбане */
 .task.kanban {
     background: #ffffff;
     border: 1px solid rgba(0, 0, 0, 0.06);
     border-radius: 8px;
     padding: 8px 10px;
-    margin-bottom: 6px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
     transition: all 0.2s;
     cursor: grab;
     user-select: none;
     max-width: 100%;
-    /* Убираем фиксированную высоту */
     height: auto;
-    /* Минимальная высота только по содержимому */
     min-height: 0;
 }
 
-/* Заголовок задачи */
+/* Заголовок задачи в канбане */
 .task.kanban .task__title {
     font-size: 13px;
     font-weight: 600;
     color: #1e0a3c;
     margin: 0 0 4px 0;
     line-height: 1.3;
-    /* Убираем обрезку текста */
     white-space: normal;
     word-wrap: break-word;
 }
 
-/* Описание задачи */
+/* Описание задачи в канбане */
 .task.kanban .task__desc {
     font-size: 11px;
     color: #8a8398;
     margin: 0 0 5px 0;
     line-height: 1.3;
-    /* Убираем обрезку текста */
     white-space: normal;
     word-wrap: break-word;
 }
 
-/* Футер карточки */
+/* Футер карточки канбана */
 .task.kanban .task__footer {
     display: flex;
     justify-content: space-between;
@@ -677,7 +688,7 @@ html, body {
     margin-top: 0;
 }
 
-/* Бейдж приоритета */
+/* Бейдж приоритета в канбане */
 .task.kanban .task__label {
     display: inline-block;
     padding: 2px 8px;
@@ -687,6 +698,7 @@ html, body {
     white-space: nowrap;
 }
 
+/* Цвета для бейджей приоритета */
 .task.kanban .task__label.high {
     background-color: #FEE2E2;
     color: #991B1B;
@@ -702,32 +714,14 @@ html, body {
     color: #156534;
 }
 
-/* ===== СПИСОК ЗАДАЧ (КОНТЕЙНЕР) ===== */
-.task-list {
-    flex: 1;
-    padding: 6px;
-    min-height: 150px;
-    max-height: 500px;
-    overflow-y: auto;
-    /* Компактное отображение */
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-/* Убираем лишние отступы у последней карточки */
-.task-list .task.kanban:last-child {
-    margin-bottom: 0;
-}
-
-/* Дата задачи */
+/* Дата в канбане */
 .task.kanban .task__date {
     font-size: 10px;
     color: #b4aee0;
     white-space: nowrap;
 }
 
-/* Эффект при наведении */
+/* Эффект при наведении на карточку канбана */
 .task.kanban:hover {
     transform: translateY(-1px);
     box-shadow: 0 2px 6px rgba(126, 102, 205, 0.1);
@@ -740,63 +734,7 @@ html, body {
     cursor: grabbing;
 }
 
-
-/* ===== КОЛОНКИ ===== */
-.column {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    border-radius: 14px;
-    width: 280px;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
-}
-
-.column_header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 12px 8px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.column_header h2 {
-    font-size: 13px;
-    font-weight: 600;
-    margin: 0;
-    padding-left: 8px;
-}
-
-.column[data-status="todo"] .column_header h2 {
-    border-left: 3px solid #3b82f6;
-}
-
-.column[data-status="in-progress"] .column_header h2 {
-    border-left: 3px solid #eab308;
-}
-
-.column[data-status="done"] .column_header h2 {
-    border-left: 3px solid #a78bfa;
-}
-
-.column_count {
-    font-size: 11px;
-    font-weight: 600;
-    color: #64748b;
-    background: rgba(0, 0, 0, 0.05);
-    padding: 2px 7px;
-    border-radius: 20px;
-}
-
-.task-list {
-    flex: 1;
-    padding: 8px;
-    min-height: 200px;
-    max-height: 450px;
-    overflow-y: auto;
-}
-
+/* Кнопка добавления задачи в канбане */
 .add-task {
     margin: 8px;
     padding: 6px;
@@ -815,22 +753,7 @@ html, body {
     border: 1px solid #735cc6;
 }
 
-/* Скроллбар */
-.task-list::-webkit-scrollbar {
-    width: 4px;
-}
-
-.task-list::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.05);
-    border-radius: 10px;
-}
-
-.task-list::-webkit-scrollbar-thumb {
-    background: rgba(126, 102, 205, 0.3);
-    border-radius: 10px;
-}
-
-/* ===== ЗАГОЛОВОК ДЛЯ KANBAN ===== */
+/* Заголовок для канбана */
 .kanban-title {
     font-size: 26px;
     font-weight: 700;
@@ -839,7 +762,7 @@ html, body {
     letter-spacing: -0.3px;
 }
 
-/* ===== ПОДСКАЗКА DRAG & DROP ===== */
+/* Подсказка по Drag & Drop */
 .kanban-hint {
     text-align: center;
     margin-top: 32px;
@@ -851,10 +774,8 @@ html, body {
     backdrop-filter: blur(4px);
 }
 
-/* ================================================
-   13. АНИМАЦИИ (Animations)
-   ================================================ */
-/* Появление элементов */
+/* ===== 13. АНИМАЦИИ ===== */
+/* Появление элемента */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -873,41 +794,52 @@ html, body {
     75% { transform: translateX(5px); }
 }
 
-/* Плавное появление для карточек Kanban */
-@keyframes cardAppear {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* ===== 14. СКРОЛЛБАР ===== */
+/* Кастомный скроллбар для всей страницы */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
 }
 
-.task.kanban {
-    animation: cardAppear 0.2s ease;
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
 }
 
-/* ================================================
-   14. АДАПТИВНЫЙ ДИЗАЙН (Responsive)
-   ================================================ */
+::-webkit-scrollbar-thumb {
+    background: rgba(126, 102, 205, 0.3);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(126, 102, 205, 0.5);
+}
+
+/* Скроллбар для списка задач в канбане */
+.task-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.task-list::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+}
+
+.task-list::-webkit-scrollbar-thumb {
+    background: rgba(126, 102, 205, 0.3);
+    border-radius: 10px;
+}
+
+/* ===== 15. АДАПТИВНЫЙ ДИЗАЙН ===== */
 /* Планшеты (до 1024px) */
 @media (max-width: 1024px) {
     .board {
         gap: 16px;
-        padding: 16px;
-        overflow-x: auto;
         justify-content: flex-start;
-    }
-
-    .column {
-        min-width: 10px;
-        flex-shrink: 0;
     }
 }
 
-/* Планшеты и телефоны (до 768px) */
+/* Телефоны (до 768px) */
 @media (max-width: 768px) {
     /* To Do адаптив */
     .filter-sort-row {
@@ -960,10 +892,6 @@ html, body {
     .kanban-title {
         font-size: 24px;
     }
-
-    .column {
-        min-width: 260px;
-    }
 }
 
 /* Маленькие телефоны (до 480px) */
@@ -992,32 +920,8 @@ html, body {
     }
 }
 
-/* ================================================
-   15. СКРОЛЛБАР (Custom Scrollbar)
-   ================================================ */
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.05);
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: rgba(126, 102, 205, 0.3);
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: rgba(126, 102, 205, 0.5);
-}
-
-/* ================================================
-   16. ДОПОЛНИТЕЛЬНЫЕ ЭЛЕМЕНТЫ (Extra)
-   ================================================ */
-/* Кнопка очистки в старом стиле (совместимость) */
+/* ===== 16. ДОПОЛНИТЕЛЬНЫЕ СТИЛИ ===== */
+/* Кнопка очистки в старом стиле (для совместимости) */
 .button--clear {
     padding: 6px 12px;
     font-size: 13px;
@@ -1041,41 +945,7 @@ html, body {
     cursor: not-allowed;
 }
 
-/* Контейнер для тулбара */
-.toolbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 15px;
-}
-
-/* Элементы вкладок (общие стили) */
-.tabs_item {
-    padding: 10px 15px;
-    border: 1px solid rgba(30, 10, 60, 0.12);
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    background: #fff;
-    color: #5e5472;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.tabs_item:hover {
-    background: #f6f4ff;
-    border-color: rgba(30, 10, 60, 0.2);
-    color: #735cc6;
-}
-
-.tabs_item--active {
-    background: #efeaff;
-    border-color: #cfc6f5;
-    color: #735cc6;
-}
-
-/* Ошибка ввода */
+/* Стиль ошибки для полей ввода */
 .input--error {
     border-color: #cb6e6e;
     box-shadow: 0 0 4px rgba(203, 110, 110, 0.3);

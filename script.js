@@ -1,4 +1,5 @@
-// ===== ЗАГЛУШКИ ДЛЯ ДЕМОНСТРАЦИИ =====
+// ===== 1. ЗАГЛУШКИ ДЛЯ ДЕМОНСТРАЦИИ =====
+// Используются при первом запуске, если localStorage пуст
 const demoTasks = [
     {
         id: 1,
@@ -53,10 +54,20 @@ const demoTasks = [
         completed: true,
         createdAt: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000).toISOString(),
         completedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString()
+    },
+    {
+        id: 7,
+        title: "🎯 Создать TaskLite Habits",
+        description: "Трекер привычек с тепловой картой",
+        priority: "high",
+        completed: false,
+        createdAt: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(),
+        completedAt: null
     }
 ];
 
-// ===== DOM ЭЛЕМЕНТЫ =====
+// ===== 2. DOM ЭЛЕМЕНТЫ =====
+// Получаем ссылки на все нужные элементы страницы
 const quickAddInput = document.getElementById("quickAddInput");
 const searchInput = document.getElementById("searchInput");
 const addBtn = document.getElementById("addBtn");
@@ -69,38 +80,41 @@ const totalCountSpan = document.getElementById("totalCount");
 const activeCountSpan = document.getElementById("activeCount");
 const completedCountSpan = document.getElementById("completedCount");
 
-// ===== ДАННЫЕ =====
-let tasks = [];
+// ===== 3. ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ =====
+let tasks = [];           // Массив всех задач
+let currentFilter = 'all';  // Текущий фильтр: all, active, completed
+let currentSort = 'date';    // Текущая сортировка: date, priority, name
 
-// Текущие фильтр и сортировка
-let currentFilter = 'all';
-let currentSort = 'date';
-
-// ===== ИНИЦИАЛИЗАЦИЯ LOCALSTORAGE =====
+// ===== 4. ИНИЦИАЛИЗАЦИЯ LOCALSTORAGE =====
+// Загружаем задачи из localStorage или используем заглушки
 function initTasks() {
     const stored = localStorage.getItem('tasklite_tasks');
     if (stored && JSON.parse(stored).length > 0) {
         tasks = JSON.parse(stored);
     } else {
-        tasks = [...demoTasks];
+        tasks = JSON.parse(JSON.stringify(demoTasks));
         saveTasks();
     }
+    renderAll();
 }
 
-// ===== СОХРАНЕНИЕ =====
+// Сохраняем задачи в localStorage
 function saveTasks() {
     localStorage.setItem('tasklite_tasks', JSON.stringify(tasks));
 }
 
-// ===== ФУНКЦИИ ДЛЯ СЧЁТЧИКОВ =====
+// ===== 5. СЧЁТЧИКИ ЗАДАЧ =====
+// Подсчёт активных задач (не выполненных)
 function countActiveTasks() {
     return tasks.filter(task => !task.completed).length;
 }
 
+// Подсчёт выполненных задач
 function countCompletedTasks() {
     return tasks.filter(task => task.completed).length;
 }
 
+// Обновление всех счётчиков на странице
 function updateCounters() {
     const totalCount = tasks.length;
     const activeCount = countActiveTasks();
@@ -111,7 +125,8 @@ function updateCounters() {
     if (completedCountSpan) completedCountSpan.textContent = completedCount;
 }
 
-// ===== ФОРМАТИРОВАНИЕ ДАТЫ =====
+// ===== 6. ФОРМАТИРОВАНИЕ ДАТЫ =====
+// Преобразует ISO дату в человекочитаемый формат
 function formatRelativeDate(dateString) {
     const date = new Date(dateString);
     const now = new Date();
@@ -125,9 +140,32 @@ function formatRelativeDate(dateString) {
     return date.toLocaleDateString('ru-RU');
 }
 
-// ===== ДОБАВЛЕНИЕ ЗАДАЧИ =====
+// ===== 7. ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ =====
+// Возвращает эмодзи для приоритета
+function getPriorityEmoji(priority) {
+    switch (priority) {
+        case 'high': return '🔴';
+        case 'medium': return '🟡';
+        case 'low': return '🟢';
+        default: return '⚪';
+    }
+}
+
+// Возвращает текст для приоритета
+function getPriorityText(priority) {
+    switch (priority) {
+        case 'high': return 'Высокий';
+        case 'medium': return 'Средний';
+        case 'low': return 'Низкий';
+        default: return 'Средний';
+    }
+}
+
+// ===== 8. ДОБАВЛЕНИЕ ЗАДАЧИ =====
 function addTask() {
     const text = quickAddInput?.value.trim();
+
+    // Валидация: задача не должна быть пустой или слишком короткой
     if (!text || text.length < 3) {
         if (quickAddInput) {
             quickAddInput.classList.add("input--error");
@@ -138,8 +176,9 @@ function addTask() {
 
     if (quickAddInput) quickAddInput.classList.remove("input--error");
 
+    // Создаём новую задачу
     const newTask = {
-        id: Date.now(),
+        id: Date.now(),                    // Уникальный ID (timestamp)
         title: text,
         description: "",
         priority: "medium",
@@ -148,21 +187,21 @@ function addTask() {
         completedAt: null
     };
 
-    tasks.unshift(newTask);
+    tasks.unshift(newTask);  // Добавляем в начало массива
     saveTasks();
     renderAll();
 
     if (quickAddInput) quickAddInput.value = "";
 }
 
-// ===== УДАЛЕНИЕ ЗАДАЧИ =====
+// ===== 9. УДАЛЕНИЕ ЗАДАЧИ =====
 function deleteTask(id) {
     tasks = tasks.filter(task => task.id !== id);
     saveTasks();
     renderAll();
 }
 
-// ===== ПЕРЕКЛЮЧЕНИЕ СТАТУСА =====
+// ===== 10. ПЕРЕКЛЮЧЕНИЕ СТАТУСА (выполнено/не выполнено) =====
 function toggleTask(id) {
     const task = tasks.find(t => t.id === id);
     if (task) {
@@ -173,14 +212,14 @@ function toggleTask(id) {
     }
 }
 
-// ===== ОЧИСТКА ВЫПОЛНЕННЫХ =====
+// ===== 11. ОЧИСТКА ВЫПОЛНЕННЫХ ЗАДАЧ =====
 function clearCompleted() {
     tasks = tasks.filter(task => !task.completed);
     saveTasks();
     renderAll();
 }
 
-// ===== ФИЛЬТРАЦИЯ =====
+// ===== 12. ФИЛЬТРАЦИЯ ЗАДАЧ =====
 function filterTasks(tasksToFilter) {
     switch (currentFilter) {
         case 'active':
@@ -192,28 +231,28 @@ function filterTasks(tasksToFilter) {
     }
 }
 
-// ===== СОРТИРОВКА =====
+// ===== 13. СОРТИРОВКА ЗАДАЧ =====
 function sortTasks(tasksToSort) {
     const sorted = [...tasksToSort];
 
     switch (currentSort) {
-        case 'date':
+        case 'date':      // Новые → Старые
             return sorted.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-        case 'date-asc':
+        case 'date-asc':  // Старые → Новые
             return sorted.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
-        case 'priority':
+        case 'priority':  // По приоритету (высокий → низкий)
             const priorityOrder = { high: 3, medium: 2, low: 1 };
             return sorted.sort((a, b) => priorityOrder[b.priority] - priorityOrder[a.priority]);
-        case 'name-asc':
+        case 'name-asc':  // По имени А→Я
             return sorted.sort((a, b) => a.title.localeCompare(b.title));
-        case 'name-desc':
+        case 'name-desc': // По имени Я→А
             return sorted.sort((a, b) => b.title.localeCompare(a.title));
         default:
             return sorted;
     }
 }
 
-// ===== ПОИСК =====
+// ===== 14. ПОИСК ЗАДАЧ =====
 function searchTasks(tasksToSearch) {
     const query = searchInput?.value.toLowerCase().trim() || "";
     if (!query) return tasksToSearch;
@@ -224,31 +263,13 @@ function searchTasks(tasksToSearch) {
     );
 }
 
-// ===== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ =====
-function getPriorityEmoji(priority) {
-    switch (priority) {
-        case 'high': return '🔴';
-        case 'medium': return '🟡';
-        case 'low': return '🟢';
-        default: return '⚪';
-    }
-}
-
-function getPriorityText(priority) {
-    switch (priority) {
-        case 'high': return 'Высокий';
-        case 'medium': return 'Средний';
-        case 'low': return 'Низкий';
-        default: return 'Средний';
-    }
-}
-
-// ===== РЕНДЕР ОДНОЙ ЗАДАЧИ =====
+// ===== 15. РЕНДЕР ОДНОЙ ЗАДАЧИ =====
 function renderTask(taskData) {
     const item = document.createElement("div");
     item.classList.add("task-item");
     item.setAttribute("data-id", taskData.id);
 
+    // Левая часть с чекбоксом и информацией
     const content = document.createElement("div");
     content.classList.add("task-content");
 
@@ -269,9 +290,9 @@ function renderTask(taskData) {
     title.classList.add("task-title");
     if (taskData.completed) title.classList.add("completed");
     title.textContent = taskData.title;
-
     infoDiv.appendChild(title);
 
+    // Описание (если есть)
     if (taskData.description) {
         const desc = document.createElement("div");
         desc.classList.add("task-desc");
@@ -279,6 +300,7 @@ function renderTask(taskData) {
         infoDiv.appendChild(desc);
     }
 
+    // Мета-информация (приоритет, дата)
     const metaDiv = document.createElement("div");
     metaDiv.classList.add("task-meta");
 
@@ -297,7 +319,7 @@ function renderTask(taskData) {
     content.appendChild(checkboxDiv);
     content.appendChild(infoDiv);
 
-    // Действия
+    // Кнопка удаления
     const actionsDiv = document.createElement("div");
     actionsDiv.classList.add("task-actions");
 
@@ -306,7 +328,6 @@ function renderTask(taskData) {
     deleteBtn.title = "Удалить";
     deleteBtn.textContent = "🗑️";
     deleteBtn.addEventListener("click", () => deleteTask(taskData.id));
-
     actionsDiv.appendChild(deleteBtn);
 
     item.appendChild(content);
@@ -315,19 +336,19 @@ function renderTask(taskData) {
     return item;
 }
 
-// ===== ОСНОВНОЙ РЕНДЕР =====
+// ===== 16. ОСНОВНОЙ РЕНДЕР ВСЕХ ЗАДАЧ =====
 function renderAll() {
     if (!tasksContainer || !emptyState) return;
 
-    // Фильтрация, поиск, сортировка
+    // Применяем фильтр, поиск и сортировку
     let filteredTasks = filterTasks(tasks);
     filteredTasks = searchTasks(filteredTasks);
     filteredTasks = sortTasks(filteredTasks);
 
-    // Обновление счётчиков
+    // Обновляем счётчики
     updateCounters();
 
-    // Показ пустого состояния
+    // Показываем пустое состояние, если задач нет
     if (filteredTasks.length === 0) {
         tasksContainer.style.display = 'none';
         emptyState.style.display = 'block';
@@ -337,31 +358,32 @@ function renderAll() {
     tasksContainer.style.display = 'block';
     emptyState.style.display = 'none';
 
-    // Очистка и рендер
+    // Очищаем контейнер и рендерим задачи
     tasksContainer.innerHTML = '';
     filteredTasks.forEach(task => {
         tasksContainer.appendChild(renderTask(task));
     });
 }
 
-// ===== ОБРАБОТЧИКИ СОБЫТИЙ =====
-// Добавление задачи
+// ===== 17. ОБРАБОТЧИКИ СОБЫТИЙ =====
+// Добавление задачи по кнопке
 if (addBtn) {
     addBtn.addEventListener("click", addTask);
 }
 
+// Добавление задачи по Enter
 if (quickAddInput) {
     quickAddInput.addEventListener("keypress", (e) => {
         if (e.key === "Enter") addTask();
     });
 }
 
-// Поиск
+// Поиск задач
 if (searchInput) {
     searchInput.addEventListener("input", () => renderAll());
 }
 
-// Фильтры
+// Фильтрация задач (кнопки Все/Активные/Завершённые)
 filterBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
         filterBtns.forEach((b) => b.classList.remove("active"));
@@ -376,7 +398,7 @@ filterBtns.forEach((btn) => {
     });
 });
 
-// Сортировка
+// Сортировка задач
 if (sortSelect) {
     sortSelect.addEventListener("change", (e) => {
         currentSort = e.target.value;
@@ -384,15 +406,14 @@ if (sortSelect) {
     });
 }
 
-// Очистка выполненных
+// Очистка выполненных задач
 if (clearCompletedBtn) {
     clearCompletedBtn.addEventListener("click", clearCompleted);
 }
 
-// ===== ИНИЦИАЛИЗАЦИЯ =====
+// ===== 18. ЗАПУСК ПРИЛОЖЕНИЯ =====
 initTasks();
-renderAll();
 
-// Глобальные функции для HTML
+// Делаем функции глобальными для доступа из HTML (например, onclick)
 window.toggleTask = toggleTask;
 window.deleteTask = deleteTask;
