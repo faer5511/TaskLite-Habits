@@ -1,27 +1,126 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TaskLite - To DO</title>
-
-    <link rel="stylesheet" href="css/style.css">
+    <title>TaskLite - Kanban</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="todo">
+<body class="kanban">
     <header class="header">
         <div class="container header_container">
             <div class="header_title">TaskLite</div>
+            <nav class="tabs">
+                <a href="index.html" class="tab">To Do</a>
+                <a href="kanban.html" class="tab active">Kanban</a>
+                <a href="habits.html" class="tab">Привычки</a>
+            </nav>
         </div>
-
-       <nav class="tabs">
-            <a href="index.html" class="tab">To Do</a>
-            <a href="index.html" class="tab active">Kanban</a>
-            <a href="index.html" class="tab">Привычки</a>
-        </nav>
     </header>
 
     <main class="container">
-       <h1 class="page-title">Kaнбan</h1>
+        <h1 class="page-title kanban-title">📋 Доска задач Kanban</h1>
+
+        <div class="board">
+            <!-- Колонка To Do -->
+            <div class="column" data-status="todo">
+                <div class="column_header">
+                    <h2>📝 To Do</h2>
+                    <span class="column_count">0</span>
+                </div>
+                <div class="task-list">
+                    <!-- Заглушки To Do -->
+                    <div class="task kanban" data-id="1" draggable="true">
+                        <h3 class="task__title">📚 Изучить JavaScript</h3>
+                        <p class="task__desc">Продвинутые темы: замыкания, промисы, async/await</p>
+                        <footer class="task__footer">
+                            <span class="task__label high">🔴 Высокий</span>
+                            <time class="task__date">📅 2 дня назад</time>
+                        </footer>
+                    </div>
+                    <div class="task kanban" data-id="4" draggable="true">
+                        <h3 class="task__title">📝 Написать документацию</h3>
+                        <p class="task__desc">Описание функционала TaskLite</p>
+                        <footer class="task__footer">
+                            <span class="task__label low">🟢 Низкий</span>
+                            <time class="task__date">📅 сегодня</time>
+                        </footer>
+                    </div>
+                    <div class="task kanban" data-id="7" draggable="true">
+                        <h3 class="task__title">🎯 Создать TaskLite Habits</h3>
+                        <p class="task__desc">Трекер привычек с тепловой картой</p>
+                        <footer class="task__footer">
+                            <span class="task__label high">🔴 Высокий</span>
+                            <time class="task__date">📅 3 часа назад</time>
+                        </footer>
+                    </div>
+                </div>
+                <button class="add-task">+ Добавить задачу</button>
+            </div>
+
+            <!-- Колонка In Progress -->
+            <div class="column" data-status="in-progress">
+                <div class="column_header">
+                    <h2>⚡ In Progress</h2>
+                    <span class="column_count">0</span>
+                </div>
+                <div class="task-list">
+                    <!-- Заглушки In Progress -->
+                    <div class="task kanban" data-id="2" draggable="true">
+                        <h3 class="task__title">🎨 Сделать дизайн для TaskLite</h3>
+                        <p class="task__desc">Нарисовать макеты в Figma</p>
+                        <footer class="task__footer">
+                            <span class="task__label medium">🟡 Средний</span>
+                            <time class="task__date">📅 вчера</time>
+                        </footer>
+                    </div>
+                    <div class="task kanban" data-id="5" draggable="true">
+                        <h3 class="task__title">🐛 Исправить баги в Kanban</h3>
+                        <p class="task__desc">Проблема с drag-and-drop</p>
+                        <footer class="task__footer">
+                            <span class="task__label high">🔴 Высокий</span>
+                            <time class="task__date">📅 2 часа назад</time>
+                        </footer>
+                    </div>
+                </div>
+                <button class="add-task">+ Добавить задачу</button>
+            </div>
+
+            <!-- Колонка Done -->
+            <div class="column" data-status="done">
+                <div class="column_header">
+                    <h2>✅ Done</h2>
+                    <span class="column_count">0</span>
+                </div>
+                <div class="task-list">
+                    <!-- Заглушки Done -->
+                    <div class="task kanban" data-id="3" draggable="true">
+                        <h3 class="task__title">💪 Тренировка</h3>
+                        <p class="task__desc">30 минут кардио + растяжка</p>
+                        <footer class="task__footer">
+                            <span class="task__label medium">🟡 Средний</span>
+                            <time class="task__date">📅 3 дня назад</time>
+                        </footer>
+                    </div>
+                    <div class="task kanban" data-id="6" draggable="true">
+                        <h3 class="task__title">🚀 Задеплоить на GitHub Pages</h3>
+                        <p class="task__desc">Настроить CI/CD</p>
+                        <footer class="task__footer">
+                            <span class="task__label low">🟢 Низкий</span>
+                            <time class="task__date">📅 4 дня назад</time>
+                        </footer>
+                    </div>
+                </div>
+                <button class="add-task">+ Добавить задачу</button>
+            </div>
+        </div>
+
+        <!-- Подсказка по Drag & Drop -->
+        <div class="kanban-hint">
+            💡 Подсказка: перетаскивайте задачи зажатой левой кнопкой мыши между колонками
+        </div>
     </main>
+
+    <script src="kanban.js"></script>
 </body>
 </html>
