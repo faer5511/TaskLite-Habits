@@ -1,105 +1,118 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TaskLite - To Do</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body class="todo">
-    <!-- ===== ШАПКА САЙТА ===== -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="todo">
+    <!-- ===== WACK САЙТА ===== -->
     <header class="header">
-        <div class="container header_container">
-            <!-- Логотип -->
-            <div class="header_title">TaskLite</div>
+      <div class="container header_container">
+        <!-- Логотип -->
+        <div class="header_title">TaskLite</div>
 
-            <!-- Навигация между страницами -->
-            <nav class="tabs">
-                <a href="index.html" class="tab active">To Do</a>
-                <a href="kanban.html" class="tab">Kanban</a>
-                <a href="habits.html" class="tab">Привычки</a>
-            </nav>
-        </div>
+        <!-- Навигация между страницами -->
+        <nav class="tabs">
+          <a href="index.html" class="tab active">To Do</a>
+          <a href="kanban.html" class="tab">Kanban</a>
+          <a href="habits.html" class="tab">Привычки</a>
+        </nav>
+      </div>
     </header>
-
 
     <!-- ===== ОСНОВНОЙ КОНТЕНТ ===== -->
     <main class="container">
-        <!-- Заголовок страницы -->
-        <h1 class="page-title">To Do</h1>
+      <!-- Заголовок страницы -->
+      <h1 class="page-title">To Do</h1>
 
-        <!-- СТРОКА 1: ДОБАВЛЕНИЕ ЗАДАЧИ -->
-        <div class="add-row">
-            <!-- Поле ввода новой задачи -->
-            <input type="text" class="add-input" id="quickAddInput" placeholder="Введите задачу...">
-            <!-- Кнопка добавления -->
-            <button class="add-btn" id="addBtn">+ Добавить</button>
+      <!-- СТРОКА 1: ДОБАВЛЕНИЕ ЗАДАЧИ -->
+      <div class="add-row">
+        <!-- Поле bbox новой задачи -->
+        <input
+          type="text"
+          class="add-input"
+          id="quickAddInput"
+          placeholder="Введите задачу..."
+        />
+        <!-- Кнопка добавления -->
+        <button class="add-btn" id="addBtn">+ Добавить</button>
+      </div>
+
+      <!-- СТРОКА 2: ПОИСК ЗАДАЧ -->
+      <div class="search-row">
+        <div class="search-wrapper">
+          <input
+            type="text"
+            class="search-input"
+            id="searchInput"
+            placeholder="🔍 Поиск задач..."
+          />
+        </div>
+      </div>
+
+      <!-- СТРОКА 3: ФИЛЬТРЫ И СОРТИРОВКА -->
+      <div class="filter-sort-row">
+        <!-- Кнопки фильтрации -->
+        <div class="filter-tabs">
+          <button class="filter-btn active" data-filter="all">📋 Все</button>
+          <button class="filter-btn" data-filter="active">✅ Активные</button>
+          <button class="filter-btn" data-filter="completed">
+            ✔️ Завершённые
+          </button>
         </div>
 
-        <!-- СТРОКА 2: ПОИСК ЗАДАЧ -->
-        <div class="search-row">
-            <div class="search-wrapper">
-                <input type="text" class="search-input" id="searchInput" placeholder="🔍 Поиск задач...">
-            </div>
+        <!-- Выпадающий список сортировки -->
+        <div class="sort-group">
+          <select class="sort-select" id="sortSelect">
+            <option value="date">📅 Новые → Старые</option>
+            <option value="date-asc">📅 Старые → Новые</option>
+            <option value="priority">⭐ По приоритету</option>
+            <option value="name-asc">🔤 А→Я</option>
+            <option value="name-desc">🔤 Я→А</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- СТРОКА 4: СТАТИСТИКА ЗАДАЧ -->
+      <div class="stats-row">
+        <!-- Счётчик всех задач -->
+        <div class="stat-badge">
+          <span class="stat-badge-label">📋 Всего</span>
+          <span class="stat-badge-value" id="totalCount">0</span>
         </div>
 
-        <!-- СТРОКА 3: ФИЛЬТРЫ И СОРТИРОВКА -->
-        <div class="filter-sort-row">
-            <!-- Кнопки фильтрации -->
-            <div class="filter-tabs">
-                <button class="filter-btn active" data-filter="all">📋 Все</button>
-                <button class="filter-btn" data-filter="active">✅ Активные</button>
-                <button class="filter-btn" data-filter="completed">✔️ Завершённые</button>
-            </div>
-
-            <!-- Выпадающий список сортировки -->
-            <div class="sort-group">
-                <select class="sort-select" id="sortSelect">
-                    <option value="date">📅 Новые → Старые</option>
-                    <option value="date-asc">📅 Старые → Новые</option>
-                    <option value="priority">⭐ По приоритету</option>
-                    <option value="name-asc">🔤 А→Я</option>
-                    <option value="name-desc">🔤 Я→А</option>
-                </select>
-            </div>
+        <!-- Счётчик активных задач -->
+        <div class="stat-badge active">
+          <span class="stat-badge-label">✅ Активные</span>
+          <span class="stat-badge-value" id="activeCount">0</span>
         </div>
 
-        <!-- СТРОКА 4: СТАТИСТИКА ЗАДАЧ -->
-        <div class="stats-row">
-            <!-- Счётчик всех задач -->
-            <div class="stat-badge">
-                <span class="stat-badge-label">📋 Всего</span>
-                <span class="stat-badge-value" id="totalCount">0</span>
-            </div>
-
-            <!-- Счётчик активных задач -->
-            <div class="stat-badge active">
-                <span class="stat-badge-label">✅ Активные</span>
-                <span class="stat-badge-value" id="activeCount">0</span>
-            </div>
-
-            <!-- Счётчик выполненных задач -->
-            <div class="stat-badge completed">
-                <span class="stat-badge-label">✔️ Выполненные</span>
-                <span class="stat-badge-value" id="completedCount">0</span>
-            </div>
-
-            <!-- Кнопка очистки выполненных -->
-            <button class="clear-completed-btn" id="clearCompletedBtn">🗑️ Очистить выполненные</button>
+        <!-- Счётчик выполненных задач -->
+        <div class="stat-badge completed">
+          <span class="stat-badge-label">✔️ Выполненные</span>
+          <span class="stat-badge-value" id="completedCount">0</span>
         </div>
 
-        <!-- СТРОКА 5: СПИСОК ЗАДАЧ -->
-        <div id="tasksContainer" class="tasks-list"></div>
+        <!-- Кнопка очистки выполненных -->
+        <button class="clear-completed-btn" id="clearCompletedBtn">
+          🗑️ Очистить выполненные
+        </button>
+      </div>
 
-        <!-- ПУСТОЕ СОСТОЯНИЕ (когда нет задач) -->
-        <div class="empty-state" id="emptyState" style="display: none;">
-            <div class="empty-icon">📋</div>
-            <div class="empty-text">Нет задач</div>
-            <div class="empty-hint">Добавьте первую задачу через форму выше</div>
-        </div>
+      <!-- СТРОКА 5: СПИСОК ЗАДАЧ -->
+      <div id="tasksContainer" class="tasks-list"></div>
+
+      <!-- ПУСТОЕ СОСТОЯНИЕ (когда нет задач) -->
+      <div class="empty-state" id="emptyState" style="display: none">
+        <div class="empty-icon">📋</div>
+        <div class="empty-text">Нет задач</div>
+        <div class="empty-hint">Добавьте первую задачу через форму выше</div>
+      </div>
     </main>
 
     <!-- Подключаем JavaScript -->
-    <script src="script.js"></script>
-</body>
+    <script src="js/script.js"></script>
+  </body>
 </html>
