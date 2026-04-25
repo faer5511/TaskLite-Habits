@@ -22,7 +22,7 @@ const demoTasks = [
     },
     {
         id: 2,
-        title: "🎨 Сделать дизайн для TaskLite",
+        title: "Купить Фури для Евгения",
         description: "Нарисовать макеты в Figma",
         priority: "medium",
         status: "in-progress",
