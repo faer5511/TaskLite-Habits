@@ -12,7 +12,7 @@ let sourceStatus = null;     // Статус колонки-источника
 const demoTasks = [
     {
         id: 1,
-        title: "📚 Изучить JavaScript",
+        title: "📚 Купить насвай для Эммы",
         description: "Продвинутые темы: замыкания, промисы, async/await",
         priority: "high",
         status: "todo",
